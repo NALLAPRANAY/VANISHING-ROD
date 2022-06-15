@@ -17,7 +17,8 @@ In this case the refractive index of oil and galss rod is same, due to which the
 - [Code Explanation](#code-explanation)
 - [Imported Librares](#libraries-to-be-imported)
 - [Pins declered for stepper_motor-1](#pin-declaration-for-stepper-motor-1)
-- [Pins decleared for stepper_motor-2](#pin-declerations-for-stepper-motor-2)
+- [Pins decleared for stepper_motor-2](#pin-declerations-for-stepper-motor-2
+)
 
 
 ## Requirments
@@ -147,20 +148,45 @@ def reel():
         sleep(0.002)
         b+=1                                                        # for every instance b value is incremented 
 ```
+### Stepper Motor Rotation
+```
+
+def dereel():
+    print("Dereel")
+    d=0 # Used to start the motor from low
+    while d<950: # The No.of Rotations covered by motor which pulls the rod down
+        GPIO.output(m1, (GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m1, (GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m1, (GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m1, (GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.HIGH))
+        sleep(0.002)
+        GPIO.output(m2, (GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m2, (GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m2, (GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.LOW))
+        sleep(0.002)
+        GPIO.output(m2, (GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.HIGH))
+        sleep(0.002)
+        d+=1
+```
 
 ### led ON
 ```
 
 GPIO.setup(rp,GPIO.OUT)             #GPIO.setup() sets the relay pin as output pin
 To set the LED ON
-def relayon():                      # relay is used to turn on the light when device went online
+def relayon():                      # relayon() is used to turn on the light when device went online
      GPIO.output(rp,GPIO.HIGH)
 
 ```
 ### led OFF
 
 ```
-def relayoff():                     # relay is used to turn off the light 
+def relayoff():                     # relayoff() is used to turn off the light 
      GPIO.output(rp,GPIO.HIGH)
 ```
 
@@ -191,9 +217,9 @@ def V1_write_handler(value):    # reads the value(state) of virtual pin V1
 def V2_write_handler(value):   # reads the value of virtual pin  V2
     print(value[0])
     val2= int(float(value[0])) 
-    if val2 == 1:               # when V2==1 then the relayon function executes
+    if val2 == 1:               # when Val2==1 then the relayon function executes
         relayon() 
-    elif val2 == 0:             # when V1==1 then the relayoff function executes
+    elif val2 == 0:             # when Val2==0 then the relayoff function executes
         relayoff()  
 ```
 ### To run the Blynk
@@ -202,3 +228,4 @@ def V2_write_handler(value):   # reads the value of virtual pin  V2
 while True:
     blynk.run()               
 ```
+
