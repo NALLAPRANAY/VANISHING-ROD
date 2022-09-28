@@ -38,3 +38,6 @@ sudo systemctl stop name_of_file.service                    # To stop executing 
 
 sudo systemctl restart name_of_file.service                 # To restart the service file
 
+Reference:
+https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux
+
